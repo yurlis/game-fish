@@ -8,7 +8,7 @@ var clickAudio2 = new Audio();
 clickAudio2.src = "music/clk2.mp3";
 
 var fonMusic = new Audio();
-fonMusic.src = "music/fonmusic/portal/original.mp3";
+fonMusic.src = "music/original.mp3";
 
 var bubblsMusic = new Audio();
 bubblsMusic.src = "music/bulb1.mp3";

@@ -86,6 +86,8 @@ function fishAnimationStart() {
 
 		calculateNewCoordinates(fish);
 
+		console.log(" delta " + deltaX + " delta " + deltaY);
+
 
 		// проверка на достижение рыбой верхней границы
 		if (fish.offsetTop + fishStep * deltaY > 250) {
@@ -93,6 +95,7 @@ function fishAnimationStart() {
 		}
 
 		fish.style.left = fish.offsetLeft + fishStep * deltaX + "px";
+
 
 		/**********************************
 			События при касании объектов
@@ -146,17 +149,20 @@ function calculateNewCoordinates(fish) {
 	// вычисление векторов расстояния до курсора мыши
 	var vectorX = realMouseX - fish.offsetLeft;
 	var vectorY = realMouseY - fish.offsetTop;
-	console.log(vectorХ + "The value of a is " + vectorY);
 
 	// если курсор мыши на рыбе, то ничего не делать
-	if (vectorX == 0 && vectorY == 0) {
+	if (Math.abs(vectorX) < 5 || Math.abs(vectorY) < 3) {
 		return;
 	}
 
 	b = Math.abs(vectorX) >= Math.abs(vectorY) ? Math.abs(vectorX) : Math.abs(vectorY);
+	// дрожжание мышки компенсация
+	console.log(vectorX + " vector " + vectorY);
+
 	deltaX = vectorX / b;
 	deltaY = vectorY / b;
 
+	//if (Math.abs(deltaX) > 1) {
 	if (deltaX < 0) {
 		// рыбка плывет влево
 		fish.className = 'fishleft';
@@ -165,6 +171,7 @@ function calculateNewCoordinates(fish) {
 		// рыбка плывет вправо
 		fish.className = 'fishright';
 	}
+	//}
 
 }
 
