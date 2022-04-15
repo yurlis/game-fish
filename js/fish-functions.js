@@ -6,8 +6,8 @@ function fishContainerCreate() {
 	fishContainerBlock.id = 'fish-container-block';
 
 	// добавляем блок "fish-container-block" на поле игры он должен быть самым верхним чтобы рыба правильно ходила
-	game.appendChild(fishContainerBlock); 
-	
+	game.appendChild(fishContainerBlock);
+
 }
 
 // удаление элемента рыбка
@@ -23,7 +23,7 @@ function fishContainerDelete() {
 	if (fishContainerBlock) {
 		fishContainerBlock.remove();
 	}
-	
+
 }
 
 // добавление элемента рыбка
@@ -37,26 +37,26 @@ function fishCreate() {
 
 	// добавляем блок "startWin" на поле игры
 	fishContainerBlock.appendChild(fishBlock);
-	
+
 }
 
 function testCollision(obj1, obj2) {
 
-	var xColl=false;
-	var yColl=false;
+	var xColl = false;
+	var yColl = false;
 
 
 	if (!obj2) {
 		return; // сравнивать не с чем
 	}
 
-	var obj1x = obj1.offsetLeft - (obj1.offsetWidth-30)/2; // координата Х центра рыбы // корректируем на левую верхнюю точку более тесное сопрокосновение
+	var obj1x = obj1.offsetLeft - (obj1.offsetWidth - 30) / 2; // координата Х центра рыбы // корректируем на левую верхнюю точку более тесное сопрокосновение
 	var obj1width = obj1.offsetWidth - 30;
 
 	var obj2x = obj2.offsetLeft;
 	var obj2width = obj2.offsetWidth;
 
-	var obj1y = obj1.offsetTop - (obj1.offsetHeight-20)/2; // координата Y центра рыбы // корректируем на левую верхнюю точку более тесное сопрокосновение
+	var obj1y = obj1.offsetTop - (obj1.offsetHeight - 20) / 2; // координата Y центра рыбы // корректируем на левую верхнюю точку более тесное сопрокосновение
 	var obj1height = obj1.offsetHeight - 20;
 
 	var obj2y = obj2.offsetTop;
@@ -70,7 +70,7 @@ function testCollision(obj1, obj2) {
 		yColl = true;
 	}
 
-	if ( xColl && yColl ) { 
+	if (xColl && yColl) {
 		return true;
 	}
 	return false;
@@ -80,7 +80,7 @@ function testCollision(obj1, obj2) {
 // старт движения рыбки
 function fishAnimationStart() {
 
-	fishTimeInterval = setInterval( () => {
+	fishTimeInterval = setInterval(() => {
 
 		var fish = document.querySelector('#fish-block');
 
@@ -88,20 +88,20 @@ function fishAnimationStart() {
 
 
 		// проверка на достижение рыбой верхней границы
-		if (fish.offsetTop + fishStep*deltaY > 250) {
-			fish.style.top = fish.offsetTop + fishStep*deltaY + "px";
+		if (fish.offsetTop + fishStep * deltaY > 250) {
+			fish.style.top = fish.offsetTop + fishStep * deltaY + "px";
 		}
 
-		fish.style.left = fish.offsetLeft + fishStep*deltaX + "px";
+		fish.style.left = fish.offsetLeft + fishStep * deltaX + "px";
 
 		/**********************************
 			События при касании объектов
-		**********************************/	
+		**********************************/
 		// поймали солнце
 		if (testCollision(fish, sun)) {
-			if ( oneTrashDelete() ) {
+			if (oneTrashDelete()) {
 				deleteSun();
-				createSun();	
+				createSun();
 			} else {
 				gameOver(true, 'победа');
 			}
@@ -133,8 +133,8 @@ function fishAnimationStart() {
 			// удаляем жизнь
 			deleteLive();
 		}
-	}, fishMotionDelay); 
-	
+	}, fishMotionDelay);
+
 }
 
 function calculateNewCoordinates(fish) {
@@ -146,22 +146,24 @@ function calculateNewCoordinates(fish) {
 	// вычисление векторов расстояния до курсора мыши
 	var vectorX = realMouseX - fish.offsetLeft;
 	var vectorY = realMouseY - fish.offsetTop;
-	
+	console.log(vectorХ + "The value of a is " + vectorY);
+
 	// если курсор мыши на рыбе, то ничего не делать
 	if (vectorX == 0 && vectorY == 0) {
 		return;
 	}
 
 	b = Math.abs(vectorX) >= Math.abs(vectorY) ? Math.abs(vectorX) : Math.abs(vectorY);
-	deltaX = vectorX/b;
-	deltaY = vectorY/b;
+	deltaX = vectorX / b;
+	deltaY = vectorY / b;
 
 	if (deltaX < 0) {
 		// рыбка плывет влево
-			fish.className = 'fishleft';
-	} else {
+		fish.className = 'fishleft';
+	}
+	if (deltaX > 0) {
 		// рыбка плывет вправо
-			fish.className = 'fishright';
+		fish.className = 'fishright';
 	}
 
 }

@@ -58,20 +58,20 @@ function rulesLuse(startBlock) {
 	//создаю заголовок проиграл
 	var zagolovokProigral = document.createElement('h3');
 	zagolovokProigral.id = 'zagolovokProigral';
-	zagolovokProigral.innerText = "Ты не справился!";
+	zagolovokProigral.innerText = "You lost!";
 	//добавляю заголовок в блок правил игры
 	pravilaIgru.appendChild(zagolovokProigral);
 
 	//создаю текст проигрыша
 	var tekstProigral = document.createElement('p');
 	tekstProigral.id = "tekstProigral";
-	tekstProigral.innerText = '   Группа ученых, в которую вошли исследователи со всего мира, заявила: загрязнение воздуха, водоемов и почв ведет к преждевременной смерти миллионов людей ежегодно. Финансовый ущерб от этих экологических проблем оценили в триллионы долларов. По словам ученых, загрязнение природы угрожает дальнейшему выживанию человечества в целом.'
+	tekstProigral.innerText = 'A group of scientists from all over the world said that pollution of air, water and soil leads to the premature death of millions of people every year. The financial damage from these environmental problems has been estimated at trillions of dollars. According to scientists, pollution of nature threatens the further survival of mankind as a whole.'
 	pravilaIgru.appendChild(tekstProigral);
 }
 
 //создаю блок где будет содержаться инфо "ты победил"
 function youWinBlock(startBlock) {
-	
+
 	var winBlock = document.createElement('div');
 	winBlock.id = 'win-block';
 	//добавляю блок в окно старта
