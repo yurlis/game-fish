@@ -7,7 +7,7 @@ function startWinCreate() {
 
 	// добавляем блок "startWin" на поле игры
 	game.appendChild(startWin);
-	
+
 }
 
 // добавление элемента лампочка от лого
@@ -35,13 +35,14 @@ function logoCreate() {
 	var textBlock = document.createElement('div');
 	textBlock.id = 'text-block';
 	textBlockContainer.appendChild(textBlock);
+	//	logoMelody.stop();
 }
 
 // анимация элемента лампочка от лого
 function logoLampAnimationStart() {
 
 	// лого лампочка выезжает снизу из-за контейнера
-	logoLampTimeInterval = setInterval( () => {
+	logoLampTimeInterval = setInterval(() => {
 
 		var logoLampContainer = document.querySelector('#lamp-block-container');
 		var logoLamp = document.querySelector('#lamp-block');
@@ -62,7 +63,7 @@ function logoLampAnimationStart() {
 function logoTextAnimationStart() {
 
 	// текстовая часть выезжает из-за контейнера 
-	logoTextTimeInterval = setInterval( () => {
+	logoTextTimeInterval = setInterval(() => {
 
 		var logoText = document.querySelector('#text-block');
 		var textBlockContainer = document.querySelector('#text-block-container');
@@ -85,7 +86,7 @@ function logoTextAnimationStart() {
 function spaceCreate() {
 	// создаем блок для <h2>Press Space to continue...</h2>
 	var spaceBlock = document.createElement('h2');
-		spaceBlock.innerText = 'Press Space to continue...';
+	spaceBlock.innerText = 'Press Space to continue...';
 
 	var startWin = document.querySelector('#start-block');
 	startWin.appendChild(spaceBlock);
@@ -97,7 +98,7 @@ function spaceControl(dist) {
 	// toInfo или toStart
 	document.addEventListener("keydown", waitingSpace); // назначение функции нажатия пробела
 	//при истечении времени запускать игру(удалением стартового блока)
-	spaceInterval = setTimeout( () => {
+	spaceInterval = setTimeout(() => {
 		clearTimeout(spaceInterval);
 		startBlockRemove();
 		//код для будущего добавления окна информации о проблемах экологии
@@ -111,31 +112,32 @@ function spaceControl(dist) {
 
 	// функция обработки нажатия на клавишу
 	function waitingSpace(event) {
-	if (!gameOn) {
-		switch(event.keyCode) {
-			case 32: 
-				clickAudio.play();
-				//очищать таймер ожидания нажатия на пробел
-				clearTimeout(spaceInterval);
-				//удалять стартовый блок
-				startBlockRemove();
-				// когда в будущем будет окно информации будет переход на нее после пробела
-				if (dist == 'toInfo') {
-					infoBlockCreate(); // переход на окно информации
-				}
-				if (dist == 'toStart') {
-					startBlockCreate(); // переход на окно информации
-				}
-			break;
-		} 
+		if (!gameOn) {
+			switch (event.keyCode) {
+				case 32:
+					clickAudio.play();
+					//очищать таймер ожидания нажатия на пробел
+					clearTimeout(spaceInterval);
+					//удалять стартовый блок
+					startBlockRemove();
+					// когда в будущем будет окно информации будет переход на нее после пробела
+					if (dist == 'toInfo') {
+						infoBlockCreate(); // переход на окно информации
+					}
+					if (dist == 'toStart') {
+						startBlockCreate(); // переход на окно информации
+					}
+					break;
+			}
+		}
 	}
-  }
 }
 
 // функция создания блока старт с логотипом
 function logoBlockCreate() {
 	startWinCreate(); // содание стартового окна
 	logoCreate(); // создание лампочки
+
 }
 
 // функция удаления стартового блока
@@ -223,7 +225,7 @@ function startGame() {
 
 function startGameToKlava() {
 	//играет музыка фона
-	//fonMusic.play();
+	// fonMusic.play();
 	gameOn = true; // устанавливаем флаг что игра начата
 	// удаляем стартовый блок с кнопкой старта
 	startBlockRemove();

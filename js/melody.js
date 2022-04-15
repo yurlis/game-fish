@@ -13,7 +13,8 @@ fonMusic.src = "music/original.mp3";
 var bubblsMusic = new Audio();
 bubblsMusic.src = "music/bulb1.mp3";
 
-
+var boomMusic = new Audio();
+boomMusic.src = "music/lifelost.mp3";
 
 // function logoMelody() {
 // 	var audio = new Audio();

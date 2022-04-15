@@ -112,15 +112,18 @@ function fishAnimationStart() {
 		//поймали пузырек
 		if (testCollision(fish, bubble)) {
 			addO2();
+			bubblsMusic.play();
 			deleteBubble();
 			createBubble();
 		}
 		//коснулись сети
 		if (testCollision(fish, seine)) {
+			boomMusic.play();
 			touchSeine();
 		}
 		//поймали нефть
 		if (testCollision(fish, blot)) {
+			boomMusic.play();
 			takeO2();
 			deleteBlot();
 			createBlot();
@@ -150,28 +153,27 @@ function calculateNewCoordinates(fish) {
 	var vectorX = realMouseX - fish.offsetLeft;
 	var vectorY = realMouseY - fish.offsetTop;
 
-	// если курсор мыши на рыбе, то ничего не делать
-	if (Math.abs(vectorX) < 5 || Math.abs(vectorY) < 3) {
-		return;
-	}
-
 	b = Math.abs(vectorX) >= Math.abs(vectorY) ? Math.abs(vectorX) : Math.abs(vectorY);
+
+	// если курсор мыши на рыбе, то ничего не делать
+
 	// дрожжание мышки компенсация
-	console.log(vectorX + " vector " + vectorY);
+	if (Math.abs(vectorX) > 5) {
+		deltaX = vectorX / b;
 
-	deltaX = vectorX / b;
-	deltaY = vectorY / b;
+		if (deltaX < 0) {
+			// рыбка плывет влево
+			fish.className = 'fishleft';
+		}
+		if (deltaX > 0) {
+			// рыбка плывет вправо
+			fish.className = 'fishright';
+		}
+	}
 
-	//if (Math.abs(deltaX) > 1) {
-	if (deltaX < 0) {
-		// рыбка плывет влево
-		fish.className = 'fishleft';
+	if (Math.abs(vectorY) > 3) {
+		deltaY = vectorY / b;
 	}
-	if (deltaX > 0) {
-		// рыбка плывет вправо
-		fish.className = 'fishright';
-	}
-	//}
 
 }
 
